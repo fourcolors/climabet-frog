@@ -6,6 +6,7 @@ import { serveStatic } from "frog/serve-static";
 import { handle } from "frog/vercel";
 import { rootstock, rootstockTestnet, sepolia } from "viem/chains";
 import placeBetABI from "../placeBetABI.js";
+import { getAddress } from "viem";
 
 const { Image } = createSystem();
 
@@ -24,24 +25,31 @@ export const app = new Frog({
 
 app.transaction("/placeBetFalse", (c) => {
   console.log("gets false");
+  const checksummedAddress = getAddress(
+    "0x7f3a5c4E4A33DBbb569B72094da4C40e64129523",
+  );
+
   return c.contract({
     abi: placeBetABI,
-    chainId: `eip155:${sepolia.id}`,
+    chainId: `eip155:${rootstockTestnet.id}`,
     functionName: "placeBet",
     args: [{ _betOnA: false }],
-    to: "0x7f3a5c4E4A33DBbb569B72094da4C40e64129523", // contract address
-    value: parseEther(".00004"),
+    to: checksummedAddress, // contract address
+    value: parseEther(".004"),
   });
 });
 
 app.transaction("/placeBetTrue", (c) => {
+  const checksummedAddress = getAddress(
+    "0x7f3a5c4E4A33DBbb569B72094da4C40e64129523",
+  );
   return c.contract({
     abi: placeBetABI,
-    chainId: `eip155:${sepolia.id}`,
+    chainId: `eip155:${rootstockTestnet.id}`,
     functionName: "placeBet",
-    args: [{ _betOnA: true }],
-    to: "0x7f3a5c4E4A33DBbb569B72094da4C40e64129523", // contract address
-    value: parseEther(".00004"),
+    args: [true],
+    to: checksummedAddress, // contract address
+    value: parseEther(".004"),
   });
 });
 
