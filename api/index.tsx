@@ -4,7 +4,7 @@ import { devtools } from "frog/dev";
 import { serveStatic } from "frog/serve-static";
 // import { neynar } from 'frog/hubs'
 import { handle } from "frog/vercel";
-import { rootstock, rootstockTestnet } from "viem/chains";
+import { rootstock, rootstockTestnet, sepolia } from "viem/chains";
 import placeBetABI from "../placeBetABI.js";
 
 const { Image } = createSystem();
@@ -26,7 +26,7 @@ app.transaction("/placeBetFalse", (c) => {
   console.log("gets false");
   return c.contract({
     abi: placeBetABI,
-    chainId: `eip155:${rootstockTestnet.id}`,
+    chainId: `eip155:${sepolia.id}`,
     functionName: "placeBet",
     args: [false],
     to: "0x7f3a5c4E4A33DBbb569B72094da4C40e64129523", // contract address
@@ -37,11 +37,11 @@ app.transaction("/placeBetFalse", (c) => {
 app.transaction("/placeBetTrue", (c) => {
   return c.contract({
     abi: placeBetABI,
-    chainId: `eip155:${rootstockTestnet.id}`,
+    chainId: `eip155:${sepolia.id}`,
     functionName: "placeBet",
     args: [true],
     to: "0x7f3a5c4E4A33DBbb569B72094da4C40e64129523", // contract address
-    value: parseEther(".0004"),
+    value: parseEther(".00004"),
   });
 });
 
