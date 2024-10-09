@@ -26,7 +26,7 @@ app.transaction("/placeBetFalse", (c) => {
   console.log("gets false");
   return c.contract({
     abi: placeBetABI,
-    chainId: `eip155:1`,
+    chainId: `eip155:${rootstockTestnet.id}`,
     functionName: "placeBet",
     args: [false],
     to: "0x7f3a5c4E4A33DBbb569B72094da4C40e64129523", // contract address
