@@ -28,7 +28,7 @@ app.transaction("/placeBetFalse", (c) => {
     abi: placeBetABI,
     chainId: `eip155:${sepolia.id}`,
     functionName: "placeBet",
-    args: [false],
+    args: [{ _betOnA: false }],
     to: "0x7f3a5c4E4A33DBbb569B72094da4C40e64129523", // contract address
     value: parseEther(".00004"),
   });
@@ -39,7 +39,7 @@ app.transaction("/placeBetTrue", (c) => {
     abi: placeBetABI,
     chainId: `eip155:${sepolia.id}`,
     functionName: "placeBet",
-    args: [true],
+    args: [{ _betOnA: true }],
     to: "0x7f3a5c4E4A33DBbb569B72094da4C40e64129523", // contract address
     value: parseEther(".00004"),
   });
